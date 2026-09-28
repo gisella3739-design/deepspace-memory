@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✦ 深空记忆 · Deepspace Memory ✦</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ 星空背景 ============ -->
+<div id="starfield" aria-hidden="true"></div>
+
+<!-- ============ 顶部导航 ============ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="#home" data-nav="home">✦ 深空记忆</a>
+    <nav class="nav">
+      <a href="#home" data-nav="home" class="active">HOME</a>
+      <a href="#diary" data-nav="diary">DIARY</a>
+      <a href="#links" data-nav="links">LINKS</a>
+      <a href="#guides" data-nav="guides">GUIDES</a>
+    </nav>
+    <div class="header-side">click me → <button id="aboutBtn" class="linkish">about this web ♡</button></div>
+  </div>
+</header>
+
+<!-- ============ 首页 ============ -->
+<main>
+<section id="page-home" class="page active">
+  <div class="home-grid">
+    <!-- 左：欢迎区 -->
+    <div class="home-main">
+      <div class="welcome-card card">
+        <p class="welcome-sub">—— a little corner of the universe ——</p>
+        <h1 class="welcome-title">深 空 记 忆</h1>
+        <p class="welcome-text">这里存着我们的日记、攻略、还有一起追过的星星。<br>「引力的尽头，是你回望的地方。」</p>
+        <button class="btn-primary" data-goto="diary">ENTER SITE ♡</button>
+      </div>
+
+      <div class="card xia-card">
+        <div class="xia-avatar" aria-hidden="true">
+          <svg viewBox="0 0 120 120" width="96" height="96">
+            <circle cx="60" cy="60" r="56" fill="url(#sky)"/>
+            <defs>
+              <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#2b1e5e"/><stop offset="1" stop-color="#0d0a2a"/>
+              </linearGradient>
+            </defs>
+            <circle cx="60" cy="46" r="20" fill="#f5e3c8"/>
+            <path d="M40 46 Q40 24 60 24 Q80 24 80 46 L80 38 Q72 30 60 30 Q48 30 40 38 Z" fill="#2b1b17"/>
+            <rect x="38" y="62" width="44" height="34" rx="10" fill="#7a5c3e"/>
+            <path d="M46 62 L60 78 L74 62 L74 70 L60 84 L46 70 Z" fill="#f5f0e6"/>
+            <circle cx="52" cy="46" r="2.4" fill="#2b1b17"/><circle cx="68" cy="46" r="2.4" fill="#2b1b17"/>
+            <path d="M55 55 Q60 58 65 55" stroke="#b0715a" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+            <g transform="translate(88,86)">
+              <circle cx="0" cy="6" r="7" fill="#c0392b"/><path d="M0 -3 Q4 2 0 6 Q-4 2 0 -3" fill="#3f8f4f"/>
+              <rect x="-1" y="-8" width="2" height="5" fill="#6d4c2f"/><path d="M1 -7 Q6 -9 6 -5" stroke="#6d4c2f" stroke-width="1.6" fill="none"/>
+            </g>
+            <text x="60" y="16" text-anchor="middle" font-size="10" fill="#ffd98a">✦ 夏以昼 ✦</text>
+          </svg>
+        </div>
+        <div class="xia-body">
+          <h3>今日份夏以昼 ☀️</h3>
+          <p id="xiaQuote" class="xia-quote">"我是你的引力，也是你的降落伞。"</p>
+          <button id="xiaQuoteBtn" class="linkish">换一句 ↻</button>
+        </div>
+      </div>
+
+      <!-- 留言板 -->
+      <div class="card" id="guestbookCard">
+        <h2 class="card-title">✉️ Guest Book 留言板</h2>
+        <form id="guestbookForm" class="row-form">
+          <input type="text" id="guestName" placeholder="署名（可留空 → 匿名小星星）" maxlength="20">
+          <input type="text" id="guestMsg" placeholder="说点什么吧…" maxlength="120" required>
+          <button type="submit" class="btn-primary">发送 ✈</button>
+        </form>
+        <ul id="guestbookList" class="guestbook-list"></ul>
+      </div>
+    </div>
+
+    <!-- 右：memo + 音乐 -->
+    <aside class="home-side">
+      <div class="card">
+        <h2 class="card-title">📌 Memo</h2>
+        <form id="memoForm" class="row-form">
+          <input type="text" id="memoInput" placeholder="随手记一条…" maxlength="60" required>
+          <button type="submit" class="btn-primary">+</button>
+        </form>
+        <ul id="memoList" class="memo-list"></ul>
+      </div>
+      <div class="card">
+        <h2 class="card-title">🎵 BGM</h2>
+        <div id="bgmBox" class="bgm-box">
+          <div class="bgm-controls">
+            <button id="bgmPrev" class="btn-ghost">⏮</button>
+            <button id="bgmToggle" class="btn-ghost">▶</button>
+            <button id="bgmNext" class="btn-ghost">⏭</button>
+          </div>
+          <p id="bgmTitle" class="bgm-title">把 mp3 放进 songs/ 文件夹就会出现在这里</p>
+          <audio id="bgmAudio" preload="none"></audio>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 日记 ============ -->
+<section id="page-diary" class="page">
+  <div class="card">
+    <h2 class="card-title">📔 DIARY · 我们的小朋友圈</h2>
+    <form id="diaryForm" class="diary-form">
+      <textarea id="diaryText" rows="4" placeholder="写点碎碎念…" maxlength="2000" required></textarea>
+      <div class="diary-form-foot">
+        <label class="file-label">📷 选照片（最多 9 张）<input type="file" id="diaryPhotos" accept="image/*" multiple hidden></label>
+        <span id="photoCount">0/9</span>
+        <button type="submit" class="btn-primary">发布 ✦</button>
+      </div>
+      <div id="photoPreview" class="photo-preview"></div>
+    </form>
+    <div id="diaryProgress" class="progress hidden"><div class="progress-bar" id="diaryProgressBar"></div></div>
+  </div>
+  <div id="diaryList"></div>
+  <button id="diaryMore" class="btn-ghost center hidden">显示更多 ↓</button>
+</section>
+
+<!-- ============ 收藏 ============ -->
+<section id="page-links" class="page">
+  <div class="card">
+    <h2 class="card-title">🛰 LINKS · 收藏夹</h2>
+    <form id="linkForm" class="row-form">
+      <input type="url" id="linkUrl" placeholder="贴一个链接 https://…" required>
+      <input type="text" id="linkTitle" placeholder="标题（可留空自动用链接）" maxlength="60">
+      <select id="linkCat">
+        <option value="攻略">攻略</option>
+        <option value="吃">吃</option>
+        <option value="玩">玩</option>
+        <option value="周边">周边</option>
+        <option value="其他">其他</option>
+      </select>
+      <button type="submit" class="btn-primary">收藏 ✧</button>
+    </form>
+    <div id="linkFilter" class="chip-row"></div>
+  </div>
+  <div id="linkList" class="link-grid"></div>
+</section>
+
+<!-- ============ 攻略文档 ============ -->
+<section id="page-guides" class="page">
+  <div class="card">
+    <h2 class="card-title">📄 GUIDES · Word 攻略</h2>
+    <p class="muted">把 .docx 攻略导入进来，直接在网页里看。文件会保存在浏览器本地。</p>
+    <label class="file-label">📎 导入 .docx<input type="file" id="guideFile" accept=".docx" hidden></label>
+    <div id="guideProgress" class="progress hidden"><div class="progress-bar" id="guideProgressBar"></div></div>
+    <ul id="guideList" class="guide-list"></ul>
+  </div>
+  <div id="guideViewer" class="card hidden">
+    <div class="viewer-head">
+      <h2 id="guideViewTitle" class="card-title"></h2>
+      <button id="guideClose" class="btn-ghost">关闭 ✕</button>
+    </div>
+    <div id="guideViewBody" class="docx-body"></div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <p>✦ 深空记忆 · built with love & gravity · 数据只存在你自己的浏览器里 ✦</p>
+</footer>
+
+<!-- about 弹窗 -->
+<dialog id="aboutDialog">
+  <h2>✦ about this web ♡</h2>
+  <p>灵感来自朋友们亲手写的古早私人网站 <a href="https://github.com/jia050904/taiwan_memory" target="_blank" rel="noopener">taiwan_memory</a>——一个"我们自己小型朋友圈"。</p>
+  <p>这一版换上《恋与深空》主题色，加了夏以昼常驻位。日记、收藏、留言、memo、Word 攻略全都只存在你本地浏览器，不上传任何服务器。</p>
+  <button class="btn-primary" onclick="document.getElementById('aboutDialog').close()">好耶 ♡</button>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docx-preview@0.3.2/dist/docx-preview.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
